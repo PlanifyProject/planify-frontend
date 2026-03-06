@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfil — Planify</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<nav>
+  <span class="nav-brand">💰 <span>Planify</span></span>
+  <div class="nav-links">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="transactions.html">Transacciones</a>
+    <a href="categories.html">Categorías</a>
+    <a href="reports.html">Reportes</a>
+    <a href="profile.html">Perfil</a>
+  </div>
+  <div class="nav-actions">
+    <span class="nav-user" id="navUser"></span>
+    <button class="btn-logout" id="logoutBtn">Cerrar sesión</button>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="page-header">
+    <div>
+      <h2>Mi perfil</h2>
+      <p>Gestiona tu cuenta</p>
+    </div>
+  </div>
+
+  <div class="profile-wrapper">
+
+    <!-- Avatar -->
+    <div class="profile-avatar" id="profileAvatar">?</div>
+
+    <div class="card">
+      <div class="alert" id="profileAlert"></div>
+
+      <!-- View mode -->
+      <div id="profileView">
+        <div style="margin-bottom:1.25rem; text-align:center;">
+          <h3 id="profileName" style="margin:0 0 .25rem; font-size:1.25rem;"></h3>
+          <p id="profileEmail" style="color:var(--muted); margin:0; font-size:.9rem;"></p>
+        </div>
+        <div style="text-align:center;">
+          <button class="btn btn-primary" onclick="enableEdit()">✏️ Editar perfil</button>
+        </div>
+      </div>
+
+      <!-- Edit mode -->
+      <form id="profileForm" style="display:none;">
+        <div class="form-group">
+          <label for="editUsername">Nombre de usuario</label>
+          <input type="text" id="editUsername" placeholder="Tu nombre" />
+        </div>
+        <div class="form-group">
+          <label for="editEmail">Correo electrónico</label>
+          <input type="email" id="editEmail" placeholder="correo@ejemplo.com" />
+        </div>
+
+        <hr style="border:none; border-top:1px solid var(--border); margin:1.25rem 0;" />
+        <p style="font-size:.8rem; color:var(--muted); margin:0 0 1rem;">
+          Deja los campos de contraseña en blanco si no deseas cambiarla.
+        </p>
+
+        <div class="form-group">
+          <label for="editPassword">Nueva contraseña</label>
+          <input type="password" id="editPassword" placeholder="Nueva contraseña (opcional)" minlength="6" />
+        </div>
+
+        <div style="display:flex; gap:.75rem; justify-content:flex-end; margin-top:1.25rem;">
+          <button type="button" class="btn btn-outline" onclick="cancelEdit()">Cancelar</button>
+          <button type="submit" class="btn btn-primary" id="profileSaveBtn">Guardar cambios</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Danger zone -->
+    <div class="card" style="margin-top:1.25rem; border: 1px solid #fecaca;">
+      <h3 style="color:var(--expense); margin:0 0 .75rem; font-size:1rem;">⚠️ Zona de peligro</h3>
+      <p style="color:var(--muted); font-size:.875rem; margin:0 0 1rem;">
+        Cerrar sesión cerrará tu acceso en este dispositivo.
+      </p>
+      <button class="btn btn-danger" id="dangerLogout">Cerrar sesión</button>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/profile.js"></script>
+</body>
+</html>
