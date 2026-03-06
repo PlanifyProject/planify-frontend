@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Categorías — Planify</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<nav>
+  <span class="nav-brand">💰 <span>Planify</span></span>
+  <div class="nav-links">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="transactions.html">Transacciones</a>
+    <a href="categories.html">Categorías</a>
+    <a href="reports.html">Reportes</a>
+    <a href="profile.html">Perfil</a>
+  </div>
+  <div class="nav-actions">
+    <span class="nav-user" id="navUser"></span>
+    <button class="btn-logout" id="logoutBtn">Cerrar sesión</button>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="page-header">
+    <div>
+      <h2>Categorías</h2>
+      <p>Organiza tus ingresos y gastos por categoría</p>
+    </div>
+    <button class="btn btn-primary" id="newCatBtn">+ Nueva categoría</button>
+  </div>
+
+  <div class="alert" id="catAlert"></div>
+
+  <!-- Tabs income/expense -->
+  <div class="auth-tabs" style="max-width:300px; margin-bottom:1.5rem;">
+    <button class="active" id="tabIncomeBtn"  onclick="showCatTab('income')">Ingresos</button>
+    <button id="tabExpenseBtn" onclick="showCatTab('expense')">Gastos</button>
+  </div>
+
+  <div id="catGrid" class="category-grid">
+    <div class="spinner-wrap"><div class="spinner"></div></div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="catModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="catModalTitle">Nueva categoría</h3>
+      <button class="modal-close" onclick="closeModal('catModal')">&times;</button>
+    </div>
+    <div class="alert" id="catModalAlert"></div>
+    <form id="catForm">
+      <input type="hidden" id="catId" />
+      <div class="form-group">
+        <label for="catName">Nombre *</label>
+        <input type="text" id="catName" placeholder="Ej: Comida rápida" required />
+      </div>
+      <div class="form-group">
+        <label for="catType">Tipo *</label>
+        <select id="catType" required>
+          <option value="income">Ingreso</option>
+          <option value="expense">Gasto</option>
+        </select>
+      </div>
+      <div class="form-group" style="display:flex; gap:1rem;">
+        <div style="flex:1;">
+          <label for="catColor">Color</label>
+          <div style="display:flex; align-items:center; gap:.5rem;">
+            <input type="color" id="catColor" value="#6366f1" />
+            <span id="catColorHex" style="font-size:.8rem; color:var(--muted);">#6366f1</span>
+          </div>
+        </div>
+        <div style="flex:1;">
+          <label for="catIcon">Ícono (emoji)</label>
+          <input type="text" id="catIcon" placeholder="💰" maxlength="4" />
+        </div>
+      </div>
+      <div style="display:flex; gap:.75rem; justify-content:flex-end; margin-top:1.25rem;">
+        <button type="button" class="btn btn-outline" onclick="closeModal('catModal')">Cancelar</button>
+        <button type="submit" class="btn btn-primary" id="catSubmitBtn">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Delete confirm modal -->
+<div class="modal-overlay" id="catDeleteModal">
+  <div class="modal" style="max-width:360px; text-align:center;">
+    <div class="modal-header">
+      <h3>¿Eliminar categoría?</h3>
+      <button class="modal-close" onclick="closeModal('catDeleteModal')">&times;</button>
+    </div>
+    <p style="color:var(--muted); margin-bottom:1.5rem;">
+      Las transacciones asociadas quedarán sin categoría.
+    </p>
+    <div style="display:flex; gap:.75rem; justify-content:center;">
+      <button class="btn btn-outline" onclick="closeModal('catDeleteModal')">Cancelar</button>
+      <button class="btn btn-danger" id="confirmCatDeleteBtn">Eliminar</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/categories.js"></script>
+</body>
+</html>

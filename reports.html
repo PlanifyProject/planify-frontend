@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reportes — Planify</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Chart.js desde CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<nav>
+  <span class="nav-brand">💰 <span>Planify</span></span>
+  <div class="nav-links">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="transactions.html">Transacciones</a>
+    <a href="categories.html">Categorías</a>
+    <a href="reports.html">Reportes</a>
+    <a href="profile.html">Perfil</a>
+  </div>
+  <div class="nav-actions">
+    <span class="nav-user" id="navUser"></span>
+    <button class="btn-logout" id="logoutBtn">Cerrar sesión</button>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="page-header">
+    <div>
+      <h2>Reportes financieros</h2>
+      <p>Analiza tus finanzas con detalle</p>
+    </div>
+  </div>
+
+  <div class="alert" id="reportAlert"></div>
+
+  <!-- Date range filter -->
+  <div class="filters" style="margin-bottom:1.75rem;">
+    <div class="filter-group">
+      <label>Desde</label>
+      <input type="date" id="reportStart" />
+    </div>
+    <div class="filter-group">
+      <label>Hasta</label>
+      <input type="date" id="reportEnd" />
+    </div>
+    <div class="filter-group" style="justify-content:flex-end;">
+      <label>&nbsp;</label>
+      <button class="btn btn-primary btn-sm" onclick="loadReport()">Generar reporte</button>
+    </div>
+  </div>
+
+  <!-- Summary stats -->
+  <div class="stats-grid" id="reportStats"></div>
+
+  <!-- Charts grid -->
+  <div class="report-grid">
+    <!-- Monthly bar chart -->
+    <div class="chart-card" style="grid-column:1/-1;">
+      <h3>📈 Evolución mensual — Ingresos vs Gastos</h3>
+      <canvas id="monthlyChart"></canvas>
+    </div>
+
+    <!-- Expense by category pie -->
+    <div class="chart-card">
+      <h3>🍩 Gastos por categoría</h3>
+      <canvas id="expensePieChart"></canvas>
+    </div>
+
+    <!-- Income by category pie -->
+    <div class="chart-card">
+      <h3>🟢 Ingresos por categoría</h3>
+      <canvas id="incomePieChart"></canvas>
+    </div>
+
+    <!-- Category breakdown table (full width) -->
+    <div class="chart-card" style="grid-column:1/-1;">
+      <h3>📋 Detalle por categoría</h3>
+      <ul class="cat-breakdown" id="catBreakdown">
+        <li><div class="spinner-wrap"><div class="spinner"></div></div></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/reports.js"></script>
+</body>
+</html>
